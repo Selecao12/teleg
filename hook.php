@@ -54,5 +54,6 @@ try {
 
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     // В случае неудачи будет выведена ошибка
+    echo '<pre>';
     var_dump($e);
 }
