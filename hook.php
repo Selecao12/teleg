@@ -20,7 +20,7 @@ $BOT_NAME = "auth_project_bot";
 // Данные базы данных
 $mysql_credentials = [
     'host'     => 'localhost',
-    'user'     => 'root',
+    'user'     => 'nikiti1m_teleg',
     'password' => '5HX%K9mC',
     'database' => 'nikiti1m_teleg',
 ];
