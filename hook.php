@@ -15,7 +15,7 @@ $API_KEY = '775369493:AAG5XX1HTdFXCcA9p0HwAHGdcWAiqiuHOgg';
 $USER_ID = '476237163';
 
 // Придумайте своему боту имя
-$BOT_NAME = "AuthBot";
+$BOT_NAME = "auth_project_bot";
 
 // Данные базы данных
 $mysql_credentials = [

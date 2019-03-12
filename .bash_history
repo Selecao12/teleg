@@ -26,3 +26,7 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 composer -v
 php composer.phar require longman/telegram-bot
+ll
+git commit -m "Hook, db created" 
+git add .
+git commit -m "Hook, db created" 
