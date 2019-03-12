@@ -21,7 +21,7 @@ $BOT_NAME = "auth_project_bot";
 $mysql_credentials = [
     'host'     => 'localhost',
     'user'     => 'root',
-    'password' => '',
+    'password' => '5HX%K9mC',
     'database' => 'nikiti1m_teleg',
 ];
 
