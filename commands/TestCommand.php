@@ -25,6 +25,9 @@ class TestCommand extends UserCommand
         $chat_id = $message->getChat()->getId();   // Get the current Chat ID
 
         $text = $message->getText(true);
+        if ($text == '') {
+            $text = 'NO TEXT';
+        }
 
         $data = [                                  // Set up the new message data
             'chat_id' => $chat_id,                 // Set Chat ID to send the message to
