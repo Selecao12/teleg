@@ -109,7 +109,7 @@ class RegisterCommand extends UserCommand
         $login = $text[0];
         $password = $text[1];
 
-        if (!$this->checkLogin($login) || !$this->checkPassword($password)) {
+        if (!$this->checkLogin($login) | !$this->checkPassword($password)) {
             return false;
         }
 
@@ -131,13 +131,13 @@ class RegisterCommand extends UserCommand
 
         // проверка длины логина
         if (mb_strlen($login) < 6) {
-            $this->errors[] = 'Короткий логин - длина пароля должна быть не менее 6 символов.';
+            $this->errors[] = 'Короткий логин - длина логина должна быть не менее 6 символов.';
             return false;
         }
 
         // проверка валидности символов в логине
         if (preg_match('/[^[:alnum:]_]/', $login)) {
-            $this->errors[] = 'В логине присутствуют не валидные символы - разрешается использовать только латиницу, цифры и знак нижнего подчеркивания.';
+            $this->errors[] = 'В логине присутствуют недопустимые символы - разрешается использовать только латиницу, цифры и знак нижнего подчеркивания.';
             return false;
         }
 
