@@ -106,8 +106,8 @@ class RegisterCommand extends UserCommand
             $this->errors[] = 'Неверно введены данные - вы должны указать логин и пароль через пробел после команды register.';
             return false;
         }
-        $login = $text[0];
-        $password = $text[1];
+        $login = $data[0];
+        $password = $data[1];
 
         if (!$this->checkLogin($login) | !$this->checkPassword($password)) {
             return false;
