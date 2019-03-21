@@ -130,9 +130,9 @@ class RegisterCommand extends UserCommand
         }
 
         // проверка валидности символов в логине
-        if (preg_match('/[^[:alnum:]_]/', $login)) {
-            return false;
-        }
+//        if (preg_match('/[^[:alnum:]_]/', $login)) {
+//            return false;
+//        }
 
         // проверка на существование логина в БД
         $PDO = DB::getPdo();
