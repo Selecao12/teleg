@@ -44,7 +44,7 @@ class RegisterCommand extends UserCommand
                     "Логин: $login\n" .
                     "Пароль: $password";
             } else {
-                $text = "Ошибка регистрации\n" . implode("\n", $this->errors);
+                $text = "Ошибка\n" . implode("\n", $this->errors);
             }
         }
 
