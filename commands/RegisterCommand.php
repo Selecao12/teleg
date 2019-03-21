@@ -100,13 +100,13 @@ class RegisterCommand extends UserCommand
         $data = explode(' ', $text);
 
         if (count($data) < 2) {
-            return false;
+//            return false;
         }
         $login = $text[0];
         $password = $text[1];
 
         if ($this->checkLogin($login) === false || $this->checkPassword($password) === false) {
-            return false;
+//            return false;
         }
 
         return [
@@ -130,23 +130,23 @@ class RegisterCommand extends UserCommand
         }
 
         // проверка валидности символов в логине
-//        if (preg_match('/[^[:alnum:]_]/', $login)) {
-//            return false;
-//        }
+        if (preg_match('/[^[:alnum:]_]/', $login)) {
+            return false;
+        }
 
         // проверка на существование логина в БД
-//        $PDO = DB::getPdo();
-//
-//        $sql = 'SELECT count(*) as count FROM site_user WHERE login = :login';
-//        $query = $PDO->prepare($sql);
-//        $query->bindParam(':login', $login, $PDO::PARAM_STR);
-//        $query->execute();
-//
-//        $row = $query->fetch($PDO::FETCH_ASSOC);
-//
-//        if ($row['count'] != 0) {
-//            return false;
-//        }
+        $PDO = DB::getPdo();
+
+        $sql = 'SELECT count(*) as count FROM site_user WHERE login = :login';
+        $query = $PDO->prepare($sql);
+        $query->bindParam(':login', $login, $PDO::PARAM_STR);
+        $query->execute();
+
+        $row = $query->fetch($PDO::FETCH_ASSOC);
+
+        if ($row['count'] != 0) {
+            return false;
+        }
 
         return true;
     }
@@ -154,9 +154,9 @@ class RegisterCommand extends UserCommand
     private function checkPassword($password)
     {
         // проверка длины пароля - 8 символом
-//        if (mb_strlen($password) < 8) {
-//            return false;
-//        }
+        if (mb_strlen($password) < 8) {
+            return false;
+        }
 
         return true;
     }
