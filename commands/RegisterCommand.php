@@ -19,23 +19,19 @@ class RegisterCommand extends UserCommand
     protected $usage = '/register';                    // Usage of your command
     protected $version = '1.0.0';                  // Version of your command
 
+    protected $errors = [];
+
     public function execute()
     {
         $message = $this->getMessage();            // Get Message object
-
         $chat_id = $message->getChat()->getId();   // Get the current Chat ID
-
         $userId = $message->getFrom()->getId();
-
         $text = $message->getText(true);
 
         $registerData = $this->getRegisterData($text);
 
         if ($registerData === false) {
-            $text = "Ошибка, неверно заполнены поле(поля) регистрации или такой логин уже существует\n" .
-                "Логин должен быть не короче 6 символов, состоять только из латинских букв, цифр и символом нижнего подчеркивания.\n" .
-                "Пароль должен быть не короче 8 символов.\n" .
-                "Логин и пароль должны быть разделены пробелом";
+            $text = "Ошибка регистрации\n" . implode("\n", $this->errors);
         } else {
 
             $login = $registerData['login'];
@@ -48,7 +44,7 @@ class RegisterCommand extends UserCommand
                     "Логин: $login\n" .
                     "Пароль: $password";
             } else {
-                $text = "Ошибка";
+                $text = "Ошибка регистрации\n" . implode("\n", $this->errors);
             }
         }
 
@@ -82,7 +78,12 @@ class RegisterCommand extends UserCommand
         $result->bindParam(':password_hash', $password_hash, $PDO::PARAM_STR);
         $result->bindParam(':is_confirmed', $isConfirmed, $PDO::PARAM_INT);
 
-        return $result->execute();
+        if ($result->execute()) {
+            return true;
+        } else {
+            $this->errors[] = 'Ошибка добавления данных в базу данных - повторите попытку.';
+            return false;
+        }
     }
 
     /**
@@ -91,22 +92,25 @@ class RegisterCommand extends UserCommand
      * @param $text
      * @return array|bool
      */
-    private function getRegisterData($text) {
-
+    private function getRegisterData($text)
+    {
         if ($text == '') {
+            $this->errors[] = 'Отправлен пустой текст - вы должны указать логин и пароль через пробел после команды register.';
             return false;
         }
 
+        // разбиваем сообщение пользователя на логин и пароль
         $data = explode(' ', $text);
 
-        if (count($data) < 2) {
-//            return false;
+        if (count($data) != 2) {
+            $this->errors[] = 'Неверно введены данные - вы должны указать логин и пароль через пробел после команды register.';
+            return false;
         }
         $login = $text[0];
         $password = $text[1];
 
-        if ($this->checkLogin($login) === false || $this->checkPassword($password) === false) {
-//            return false;
+        if (!$this->checkLogin($login) || !$this->checkPassword($password)) {
+            return false;
         }
 
         return [
@@ -122,15 +126,18 @@ class RegisterCommand extends UserCommand
      * @param string $login
      * @return bool
      */
-    private function checkLogin($login) {
+    private function checkLogin($login)
+    {
 
         // проверка длины логина
         if (mb_strlen($login) < 6) {
+            $this->errors[] = 'Короткий логин - длина пароля должна быть не менее 6 символов.';
             return false;
         }
 
         // проверка валидности символов в логине
         if (preg_match('/[^[:alnum:]_]/', $login)) {
+            $this->errors[] = 'В логине присутствуют не валидные символы - разрешается использовать только латиницу, цифры и знак нижнего подчеркивания.';
             return false;
         }
 
@@ -145,6 +152,7 @@ class RegisterCommand extends UserCommand
         $row = $query->fetch($PDO::FETCH_ASSOC);
 
         if ($row['count'] != 0) {
+            $this->errors[] = 'Такой логин уже существует - придумайте новый.';
             return false;
         }
 
@@ -155,6 +163,7 @@ class RegisterCommand extends UserCommand
     {
         // проверка длины пароля - 8 символом
         if (mb_strlen($password) < 8) {
+            $this->errors[] = 'Короткий пароль - длина пароля должна быть не менее 8 символов.';
             return false;
         }
 
