@@ -135,18 +135,18 @@ class RegisterCommand extends UserCommand
 //        }
 
         // проверка на существование логина в БД
-        $PDO = DB::getPdo();
-
-        $sql = 'SELECT count(*) as count FROM site_user WHERE login = :login';
-        $query = $PDO->prepare($sql);
-        $query->bindParam(':login', $login, $PDO::PARAM_STR);
-        $query->execute();
-
-        $row = $query->fetch($PDO::FETCH_ASSOC);
-
-        if ($row['count'] != 0) {
-            return false;
-        }
+//        $PDO = DB::getPdo();
+//
+//        $sql = 'SELECT count(*) as count FROM site_user WHERE login = :login';
+//        $query = $PDO->prepare($sql);
+//        $query->bindParam(':login', $login, $PDO::PARAM_STR);
+//        $query->execute();
+//
+//        $row = $query->fetch($PDO::FETCH_ASSOC);
+//
+//        if ($row['count'] != 0) {
+//            return false;
+//        }
 
         return true;
     }
