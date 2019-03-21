@@ -45,7 +45,7 @@ class ShowmyaccountsCommand extends UserCommand
 
         $sql = 'SELECT login FROM site_user WHERE user_id = :user_id';
         $query = $PDO->prepare($sql);
-        $query->bindParam(':user', $userId, $PDO::PARAM_INT);
+        $query->bindParam(':user_id', $userId, $PDO::PARAM_INT);
         $query->execute();
 
         $row = $query->fetchAll();
