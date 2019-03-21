@@ -48,7 +48,7 @@ class ShowmyaccountsCommand extends UserCommand
         $query->bindParam(':user_id', $userId, $PDO::PARAM_INT);
         $query->execute();
 
-        $row = $query->fetchAll();
+        $row = $query->fetchAll($PDO::FETCH_COLUMN, 0);
 
         return $row;
     }
