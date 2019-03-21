@@ -105,7 +105,7 @@ class RegisterCommand extends UserCommand
         $login = $text[0];
         $password = $text[1];
 
-        if (!$this->checkLogin($login) || !$this->checkPassword($password)) {
+        if ($this->checkLogin($login) === false || $this->checkPassword($password) === false) {
             return false;
         }
 
