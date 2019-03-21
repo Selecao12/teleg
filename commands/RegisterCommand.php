@@ -31,6 +31,7 @@ class RegisterCommand extends UserCommand
         $registerData = $this->getRegisterData($text);
 
         if ($registerData === false) {
+            // Пользователь ввел неверные данные.
             $text = "Ошибка регистрации\n" . implode("\n", $this->errors);
         } else {
 
@@ -44,6 +45,7 @@ class RegisterCommand extends UserCommand
                     "Логин: $login\n" .
                     "Пароль: $password";
             } else {
+                // Произошла ошибка записи в БД. Пользователь ввел верные данные.
                 $text = "Ошибка\n" . implode("\n", $this->errors);
             }
         }
