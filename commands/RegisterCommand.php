@@ -99,7 +99,7 @@ class RegisterCommand extends UserCommand
 
         $data = explode(' ', $text);
 
-        if (count($data) != 2) {
+        if (count($data) < 2) {
             return false;
         }
         $login = $text[0];
@@ -154,9 +154,9 @@ class RegisterCommand extends UserCommand
     private function checkPassword($password)
     {
         // проверка длины пароля - 8 символом
-        if (mb_strlen($password) < 8) {
-            return false;
-        }
+//        if (mb_strlen($password) < 8) {
+//            return false;
+//        }
 
         return true;
     }
