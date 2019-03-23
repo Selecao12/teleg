@@ -93,7 +93,7 @@ class ChangepasswordCommand extends UserCommand
     private function getInputData($text)
     {
         if ($text == '') {
-            $this->errors[] = 'Отправлен пустой текст - вы должны указать логин, старый пароль и новый пароль через пробел после команды register.';
+            $this->errors[] = 'Отправлен пустой текст - вы должны указать логин, старый пароль и новый пароль через пробел после команды changepassword.';
             return false;
         }
 
@@ -101,7 +101,7 @@ class ChangepasswordCommand extends UserCommand
         $data = explode(' ', $text);
 
         if (count($data) != 3) {
-            $this->errors[] = 'Неверно введены данные - вы должны указать логин, старый пароль и новый пароль через пробел после команды register.';
+            $this->errors[] = 'Неверно введены данные - вы должны указать логин, старый пароль и новый пароль через пробел после команды changepassword.';
             return false;
         }
         $login = $data[0];
