@@ -135,7 +135,7 @@ class ChangepasswordCommand extends UserCommand
 
         $row = $query->fetch($PDO::FETCH_ASSOC);
 
-        if (count($row) == 0) {
+        if (count($row['login']) == 0) {
             $this->errors[] = 'У вас нет аккаунта с таким логином.';
             return false;
         }
