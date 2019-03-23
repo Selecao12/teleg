@@ -164,7 +164,7 @@ class ChangepasswordCommand extends UserCommand
     {
         // проверка длины пароля - 8 символом
         if (mb_strlen($password) < 8) {
-            $this->errors[] = 'Короткий пароль - длина пароля должна быть не менее 8 символов.';
+            $this->errors[] = 'Короткий новый пароль - длина пароля должна быть не менее 8 символов.';
             return false;
         }
 
