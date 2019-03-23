@@ -126,7 +126,7 @@ class ChangepasswordCommand extends UserCommand
     {
 
         $PDO = DB::getPdo();
-        $sql = 'SELECT * FROM site_user WHERE user_id = :user_id login = :login';
+        $sql = 'SELECT * FROM site_user WHERE user_id = :user_id AND login = :login';
 
         $query = $PDO->prepare($sql);
         $query->bindParam(':user_id', $userId, $PDO::PARAM_STR);
