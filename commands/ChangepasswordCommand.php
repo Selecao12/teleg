@@ -29,20 +29,14 @@ class ChangepasswordCommand extends UserCommand
         $userId = $message->getFrom()->getId();
         $text = $message->getText(true);
 
-        // получаем из сообщения пользователя логин, старый пароль, новый пароль
-        $inputData = $this->getInputData($text);
-
-        if (!(count($this->errors))) {
-            $this->checkNewPassword($inputData['new_password']);
-            $userRow = $this->getUserRow($userId, $inputData['login']);
-
-            if (!(count($this->errors)) && $this->checkOldPassword($inputData['old_password'], $userRow['password_hash'])) {
-                $this->changePassword($userId, $inputData['login'], $inputData['new_password']);
-            }
-        }
-
-        if (!(count($this->errors))) {
+        if (($inputData = $this->getInputData($text)) !== false &&
+            ($userRow = $this->getUserRow($userId, $inputData['login'])) !== false &&
+            $this->checkOldPassword($inputData['old_password'], $userRow['password_hash']) &&
+            $this->checkNewPassword($inputData['new_password']) &&
+            $this->changePassword($userId, $inputData['login'], $inputData['new_password'])
+        ) {
             $text = 'Пароль для аккаунта ' . $inputData['login'] . ' изменен.';
+
         } else {
             $text = "Ошибка смены пароля\n" . implode("\n", $this->errors);
         }
@@ -162,7 +156,7 @@ class ChangepasswordCommand extends UserCommand
 
     /**
      * Проверяет валидность нового пароля
-     * 
+     *
      * @param string $password
      * @return bool
      */
