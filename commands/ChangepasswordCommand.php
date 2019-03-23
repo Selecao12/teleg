@@ -31,8 +31,7 @@ class ChangepasswordCommand extends UserCommand
 
         if (($inputData = $this->getInputData($text)) !== false &&
             ($userRow = $this->getUserRow($userId, $inputData['login'])) !== false &&
-            $this->checkOldPassword($inputData['old_password'], $userRow['password_hash']) &
-            $this->checkNewPassword($inputData['new_password']) &&
+            ($this->checkOldPassword($inputData['old_password'], $userRow['password_hash']) & $this->checkNewPassword($inputData['new_password'])) &&
             $this->changePassword($userId, $inputData['login'], $inputData['new_password'])
         ) {
             $text = 'Пароль для аккаунта ' . $inputData['login'] . ' изменен.';
