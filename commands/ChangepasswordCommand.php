@@ -20,7 +20,7 @@ use Longman\TelegramBot\Request;
  */
 class ChangepasswordCommand extends UserCommand
 {
-    protected $name = 'changepassword';                      // Your command's name
+    protected $name = 'chnpass';                      // Your command's name
     protected $description = 'Меняет пароль у вашего аккаунта на сайте auth-project.ru. Введите логин, старый пароль и новый пароль через пробел после названия команды.'; // Your command description
     protected $usage = '/chnpass';                    // Usage of your command
     protected $version = '1.0.0';                  // Version of your command
