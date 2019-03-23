@@ -25,7 +25,7 @@ class HelpCommand extends UserCommand
     /**
      * @var string
      */
-    protected $description = 'Show bot commands help';
+    protected $description = 'Показывает помощь по командам бота';
     /**
      * @var string
      */

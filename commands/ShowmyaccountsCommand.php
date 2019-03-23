@@ -12,6 +12,12 @@ use Longman\TelegramBot\DB;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Request;
 
+/**
+ * Class ShowmyaccountsCommand
+ * @package Longman\TelegramBot\Commands\UserCommands
+ *
+ * Показывает существующие у пользователя аккаунты на auth-project.ru
+ */
 class ShowmyaccountsCommand extends UserCommand
 {
     protected $name = 'showmyaccounts';                      // Your command's name

@@ -12,6 +12,12 @@ use Longman\TelegramBot\DB;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Request;
 
+/**
+ * Class RegisterCommand
+ * @package Longman\TelegramBot\Commands\UserCommands
+ *
+ * Регистрирует пользователя на сайте
+ */
 class RegisterCommand extends UserCommand
 {
     protected $name = 'register';                      // Your command's name
