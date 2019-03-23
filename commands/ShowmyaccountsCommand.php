@@ -39,7 +39,6 @@ class ShowmyaccountsCommand extends UserCommand
 
     private function selectAccounts($userId)
     {
-
         // получение аккаунтов пользователя с данным user_id
         $PDO = DB::getPdo();
 
