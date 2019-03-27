@@ -9,20 +9,20 @@
 require_once __DIR__ . "/vendor/autoload.php";
 
 // Получите токен у бота @BotFather
-$API_KEY = '775369493:AAG5XX1HTdFXCcA9p0HwAHGdcWAiqiuHOgg';
+$API_KEY = '<token>';
 
 // Получите свой User ID у бота @MyTelegramID_bot
-$USER_ID = '476237163';
+$USER_ID = '<user_id>';
 
 // Придумайте своему боту имя
-$BOT_NAME = "auth_project_bot";
+$BOT_NAME = "<bot_name>";
 
 // Данные базы данных
 $mysql_credentials = [
-    'host'     => 'localhost',
-    'user'     => 'nikiti1m_teleg',
-    'password' => '5HX%K9mC',
-    'database' => 'nikiti1m_teleg',
+    'host'     => '<host>',
+    'user'     => '<user>',
+    'password' => '<password>',
+    'database' => '<database>',
 ];
 
 use Longman\TelegramBot\Telegram;
